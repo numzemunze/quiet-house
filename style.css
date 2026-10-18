@@ -1,0 +1,99 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
+    background: #f4f4f0;
+    color: #2a2a2a;
+    line-height: 1.6;
+}
+
+.topbar {
+    background: #1f4e3d;
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.logo { font-size: 1.2em; font-weight: bold; letter-spacing: 1px; }
+.topbar nav a { color: #cfd8d3; margin-left: 16px; text-decoration: none; font-size: 0.9em; }
+
+.listing {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.listing-header { margin-bottom: 16px; }
+.badge {
+    background: #c9302c;
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 0.75em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 2px;
+}
+.listing-header h1 { margin: 10px 0 4px; font-size: 1.6em; }
+.address { color: #666; font-size: 0.95em; }
+
+.photo-main {
+    background: #e8e8e4;
+    border: 1px solid #ccc;
+    padding: 40px 20px;
+    text-align: center;
+    margin: 16px 0;
+}
+.photo-placeholder { font-size: 1.1em; color: #888; font-style: italic; }
+.photo-note { font-size: 0.85em; color: #999; margin-top: 8px; }
+
+.details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: #fff;
+    padding: 16px;
+    border-left: 4px solid #1f4e3d;
+    margin: 16px 0;
+}
+.price-block { min-width: 200px; }
+.price { display: block; font-size: 1.8em; color: #c9302c; font-weight: bold; }
+.price-note { display: block; font-size: 0.8em; color: #888; }
+.specs { list-style: none; flex: 1; font-size: 0.95em; }
+.specs li { padding: 4px 0; border-bottom: 1px dashed #e0e0e0; }
+
+.description { background: #fff; padding: 16px; margin: 16px 0; }
+.description h2 { font-size: 1.1em; margin-bottom: 10px; color: #1f4e3d; }
+.subtle { font-style: italic; color: #777; font-size: 0.9em; margin-top: 10px; }
+
+.reviews { background: #fff; padding: 16px; margin: 16px 0; }
+.reviews h2 { font-size: 1.1em; margin-bottom: 10px; color: #1f4e3d; }
+.review { border-top: 1px solid #eee; padding: 10px 0; font-size: 0.9em; }
+.review span { display: block; color: #999; font-size: 0.85em; margin-top: 4px; }
+
+.buy-button {
+    display: block;
+    width: 100%;
+    background: #c9302c;
+    color: #fff;
+    border: none;
+    padding: 18px;
+    font-size: 1.2em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin: 24px 0 8px;
+}
+.buy-button:active { background: #a02520; }
+.buy-note { text-align: center; font-size: 0.75em; color: #999; }
+
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.75em;
+    color: #888;
+    border-top: 1px solid #ddd;
+    margin-top: 30px;
+}
+.footer-hint { font-family: monospace; color: #aaa; margin-top: 6px; }
