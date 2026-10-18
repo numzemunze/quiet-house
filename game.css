@@ -5,105 +5,112 @@ body {
     color: #fff;
     font-family: 'Courier New', monospace;
     height: 100vh;
-    overflow: hidden; /* Запрещаем скролл */
-    touch-action: manipulation; /* Убираем задержку нажатия на телефоне */
+    overflow: hidden;
+    touch-action: manipulation;
 }
 
-/* Экран интро */
-.intro {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #000;
-}
-.fade-text {
-    color: #666;
-    font-size: 1.2em;
-    animation: fadeInOut 3s forwards;
-}
-
-/* Игровой контейнер */
 .game-container {
     position: relative;
     width: 100vw;
     height: 100vh;
-    background: #0a0a0a;
+    background: #000;
 }
 
-/* Рисуем мрачный коридор через CSS-градиенты */
+/* Темный фон комнаты */
 .room-bg {
     position: absolute;
     width: 100%;
     height: 100%;
     background: 
-        /* Луч света из центра */
-        radial-gradient(circle at 50% 50%, rgba(40, 40, 40, 1) 0%, rgba(5, 5, 5, 1) 60%),
-        /* Перспектива пола */
-        linear-gradient(to bottom, transparent 50%, #111 100%);
+        radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 70%);
     z-index: 1;
 }
 
-/* Интерактивные зоны */
+/* Мерцающий свет, чтобы показать, что игра работает */
+.flicker-light {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(200, 200, 200, 0.15) 0%, rgba(0,0,0,0) 70%);
+    transform: translate(-50%, -50%);
+    animation: flicker 3s infinite alternate;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Стартовый экран */
+.intro {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.8);
+    z-index: 50;
+    text-align: center;
+    padding: 20px;
+}
+.intro p { color: #888; font-size: 1.2em; margin-bottom: 20px; }
+.tap-hint {
+    color: #c9302c !important;
+    font-size: 0.9em !important;
+    animation: blink 1.5s infinite;
+}
+
+/* Кликабельные зоны */
+#hotspots {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10;
+}
+
 .hotspot {
     position: absolute;
     top: 0;
     bottom: 0;
-    z-index: 10;
     cursor: pointer;
-    /* Для отладки можно раскомментировать border, чтобы видеть зоны */
-    /* border: 1px solid red; */
-    transition: background 0.2s;
 }
 
-/* Левая дверь */
-.left-zone {
-    left: 0;
-    width: 30%;
-}
-/* Коридор (ловушка) */
-.center-zone {
-    left: 30%;
-    width: 40%;
-}
-/* Лестница */
-.right-zone {
-    right: 0;
-    width: 30%;
-}
+.left-zone { left: 0; width: 33.3%; }
+.center-zone { left: 33.3%; width: 33.3%; }
+.right-zone { right: 0; width: 33.3%; }
 
-/* Подсветка при нажатии (чтобы игрок понимал, что зона кликабельна) */
-.left-zone:active, .right-zone:active, .center-zone:active {
+/* Подсветка при нажатии */
+.hotspot:active {
     background: rgba(255, 255, 255, 0.05);
 }
 
-/* Вспышка скримера */
+/* Вспышка */
 .flash {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background: #c9302c;
     opacity: 0;
     pointer-events: none;
-    z-index: 20;
+    z-index: 100;
     transition: opacity 0.1s;
 }
 
 /* Анимации */
-@keyframes fadeInOut {
-    0% { opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { opacity: 0; }
+@keyframes flicker {
+    0% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    100% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.9); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 @keyframes shake {
     0% { transform: translate(0, 0) rotate(0deg); }
-    20% { transform: translate(-5px, 5px) rotate(-1deg); }
-    40% { transform: translate(5px, -5px) rotate(1deg); }
-    60% { transform: translate(-5px, -5px) rotate(0deg); }
-    80% { transform: translate(5px, 5px) rotate(1deg); }
+    20% { transform: translate(-10px, 10px) rotate(-2deg); }
+    40% { transform: translate(10px, -10px) rotate(2deg); }
+    60% { transform: translate(-10px, -10px) rotate(0deg); }
+    80% { transform: translate(10px, 10px) rotate(2deg); }
     100% { transform: translate(0, 0) rotate(0deg); }
 }
