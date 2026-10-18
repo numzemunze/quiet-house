@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div class="scene">
+        <div class="intro" id="intro">
+            <p>You turned the key in the lock.</p>
+            <p>The door closed behind you on its own.</p>
+        </div>
+
+        <div class="room" id="room" style="display:none;">
+            <h1>Entrance Hall</h1>
+            <p class="desc">Dim light. It smells of dust and something else. 
+               Photographs on the walls. To the left — the door to the living room. 
+               To the right — the staircase. Straight ahead — a corridor into the depths of the house.</p>
+
+            <div class="choices">
+                <button onclick="go('living')">Enter the living room</button>
+                <button onclick="go('stairs')">Climb the staircase</button>
+                <button onclick="go('hallway')">Walk down the corridor</button>
+                <button class="look" onclick="look()">Look around carefully</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mark the "purchase"
+        localStorage.setItem('bought_house', 'true');
+
+        // Intro: 4 seconds of silence, then the room
+        setTimeout(() => {
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('room').style.display = 'block';
+        }, 4000);
+
+        function look() {
+            alert("One of the photographs shows you. Taken yesterday. You weren't here yesterday.");
+        }
+
+        function go(where) {
+            // Placeholder — you'll build separate scenes later
+            alert('You head to the ' + where + '... (scene in development)');
+        }
+    </script>
+</body>
+</html>
