@@ -7,55 +7,56 @@
     <link rel="stylesheet" href="game.css">
 </head>
 <body>
-    <div class="intro" id="intro">
-        <div class="fade-text">The door locked behind you.</div>
-    </div>
-
-    <div class="game-container" id="game" style="display:none;">
-        <!-- Фон прихожей (генерируется через CSS) -->
+    <div class="game-container" id="game">
+        <!-- Фон комнаты -->
         <div class="room-bg"></div>
-        
-        <!-- Три интерактивные зоны -->
-        <div class="hotspot left-zone" onclick="goSafe('living')"></div>
-        <div class="hotspot center-zone" onclick="triggerTrap()"></div>
-        <div class="hotspot right-zone" onclick="goSafe('stairs')"></div>
+        <div class="flicker-light"></div>
 
-        <!-- Вспышка для скримера -->
+        <!-- Стартовый экран -->
+        <div class="intro" id="intro" onclick="startGame()">
+            <p>The door locked behind you.</p>
+            <p class="tap-hint">[ Tap to open your eyes ]</p>
+        </div>
+
+        <!-- Интерактивные зоны (появятся после клика) -->
+        <div id="hotspots" style="display:none;">
+            <div class="hotspot left-zone" onclick="goSafe('living')"></div>
+            <div class="hotspot center-zone" onclick="triggerTrap()"></div>
+            <div class="hotspot right-zone" onclick="goSafe('stairs')"></div>
+        </div>
+
+        <!-- Красная вспышка -->
         <div class="flash" id="flash"></div>
     </div>
 
     <script>
-        // Запоминаем покупку
         localStorage.setItem('bought_house', 'true');
 
-        // Интро: 3 секунды темноты, потом включается свет
-        setTimeout(() => {
+        function startGame() {
+            // Прячем интро
             document.getElementById('intro').style.display = 'none';
-            document.getElementById('game').style.display = 'block';
-        }, 3000);
+            // Показываем зоны для кликов
+            document.getElementById('hotspots').style.display = 'block';
+        }
 
         function goSafe(place) {
-            // Безопасный переход (пока заглушка, потом сделаем новые комнаты)
             document.body.style.opacity = '0';
             document.body.style.transition = 'opacity 1s';
             setTimeout(() => {
-                alert("You moved to the " + place + ". (Next scene coming soon)");
+                alert("You moved to the " + place + ". (Scene coming soon)");
                 document.body.style.opacity = '1';
             }, 1000);
         }
 
         function triggerTrap() {
-            // Игрок пошел в центр и попался
             const flash = document.getElementById('flash');
             const game = document.getElementById('game');
             
-            // Тряска экрана
+            // Тряска
             game.style.animation = 'shake 0.5s infinite';
-            
             // Вспышка
             flash.style.opacity = '1';
             
-            // Через полсекунды — переход на экран смерти
             setTimeout(() => {
                 window.location.href = 'death.html';
             }, 1000);
